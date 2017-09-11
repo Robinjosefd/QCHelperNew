@@ -1,0 +1,9 @@
+D:\Robin\SourceFC\QCHelperNew\QCHelperNew\bin\QCHelperNew.dll.config
+D:\Robin\SourceFC\QCHelperNew\QCHelperNew\bin\QCHelperNew.dll
+D:\Robin\SourceFC\QCHelperNew\QCHelperNew\bin\QCHelperNew.pdb
+D:\Robin\SourceFC\QCHelperNew\QCHelperNew\obj\Debug\QCHelperNew.dll
+D:\Robin\SourceFC\QCHelperNew\QCHelperNew\obj\Debug\QCHelperNew.pdb
+D:\Robin\SourceFC\QCHelperNew\QCHelperNew\bin\AWSSDK.dll
+D:\Robin\SourceFC\QCHelperNew\QCHelperNew\bin\FCCSharpLibrary.dll
+D:\Robin\SourceFC\QCHelperNew\QCHelperNew\bin\FCCSharpLibrary.pdb
+D:\Robin\SourceFC\QCHelperNew\QCHelperNew\obj\Debug\QCHelperNew.csprojResolveAssemblyReference.cache
