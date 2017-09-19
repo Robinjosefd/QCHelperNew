@@ -112,6 +112,12 @@ namespace QCHelperNew
         {
             //this.ucQCCounts.qcDate = this.txtDate.Text;
             //this.ucQCCsv.qcDate = this.txtDate.Text;
+
+            MakeAllNull();
+
+            
+
+            LoadAllValues();
         }
 
         private void LoadAllValues()
