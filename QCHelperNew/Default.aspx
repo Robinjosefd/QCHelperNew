@@ -113,11 +113,11 @@
                         </asp:GridView>
                     </div>
                     <%--Div QCCSV  End --%>
-
+                     <br />
 
                     <%--Div QCLog   Start --%>
                     <div>
-                        <asp:Label ID="lblQClog" runat="server" Text="ASPxLabel" Font-Bold="true" ForeColor="Red">  </asp:Label>
+                        <asp:Label ID="lblQClog" runat="server" Text="Log Created" Font-Bold="true" ForeColor="Red">  </asp:Label>
 
                         <asp:GridView ID="dxGrdRobotLog" runat="server" theme="Glass">
                         </asp:GridView>

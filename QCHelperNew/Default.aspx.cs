@@ -366,6 +366,32 @@ namespace QCHelperNew
             // Session["data"] = table;
             return table;
         }
+        
+        private DataTable cutomizeDataset_RobotLog(DataSet ds)
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("SlNo");
+            table.Columns.Add("Robot");
+            table.Columns.Add("LogCreated");
+            int num = 1;
+            foreach (DataTable table2 in ds.Tables)
+            {
+                foreach (DataColumn column in table2.Columns)
+                {
+                    string columnName = column.ColumnName;
+                    string str2 = table2.Rows[0][columnName].ToString();
+                    //if ((columnName.Split(new char[] { ' ' }).Length > 3) )
+                    //{
+                        string[] strArray = new string[] { num++.ToString(), Regex.Replace(columnName, @"[0-9]*\.", ""), str2 };
+                        DataRow row = table.NewRow();
+                        row.ItemArray = strArray;
+                        table.Rows.Add(row);
+                   // }
+                }
+            }
+            // Session["data"] = table;
+            return table;
+        }
 
 
         #endregion
@@ -403,7 +429,7 @@ namespace QCHelperNew
             try
             {
                 DataTable table = new DataTable();
-                table = dal.GetQCCounts(DAL.CountQueries.LogData, txtDate.Text).Tables[0];
+                table = cutomizeDataset_RobotLog(dal.GetQCCounts(DAL.CountQueries.LogData, txtDate.Text));
 
                 obj_RobotLog = table;
                 this.lblQClog.Text = "Log Created";
