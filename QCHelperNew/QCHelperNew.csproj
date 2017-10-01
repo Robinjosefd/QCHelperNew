@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\clsGetCSV.cs" />
+    <Compile Include="App_Code\clsVisualIndicator.cs" />
     <Compile Include="App_Code\DAL.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

@@ -65,7 +65,7 @@
                                         <b>Date:</b>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtDate" runat="server"  >
+                                        <asp:TextBox ID="txtDate" runat="server">
                                         </asp:TextBox>
                                     </td>
                                     <td>
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <%--DivTimer End --%>
-                    
+
                     <br />
 
                     <%--Div QCCounts  Start --%>
@@ -91,11 +91,11 @@
                         <br />
                         <asp:GridView ID="dxGrdCount_2" runat="server" theme="Glass">
                         </asp:GridView>
-                         <br />
-                         <asp:GridView ID="dxGrdCount_3" runat="server" theme="Glass">
+                        <br />
+                        <asp:GridView ID="dxGrdCount_3" runat="server" theme="Glass">
                         </asp:GridView>
-                         <br />
-                         <asp:GridView ID="dxGrdCount_4" runat="server" theme="Glass">
+                        <br />
+                        <asp:GridView ID="dxGrdCount_4" runat="server" theme="Glass">
                         </asp:GridView>
                     </div>
                     <br />
@@ -109,11 +109,24 @@
                         <asp:GridView ID="dxGrdQCCSV1" runat="server" theme="Glass">
                         </asp:GridView>
 
-                         <asp:GridView ID="dxGrdQCCSV2" runat="server" theme="Glass">
+                        <asp:GridView ID="dxGrdQCCSV2" runat="server" theme="Glass">
                         </asp:GridView>
                     </div>
                     <%--Div QCCSV  End --%>
+
+
                      <br />
+                    <%--Div Visual Indicator   Start --%>
+                    <div>
+                        <asp:Label ID="lblVisualIndicator" runat="server" Text="Visual Indicator Functioning" Font-Bold="true" ForeColor="Red">  </asp:Label>
+
+                        <asp:GridView ID="dxGrdVisualIndicator" runat="server" theme="Glass">
+                        </asp:GridView>
+                    </div>
+                    <%--Div QCLog  End --%>
+
+
+                    <br />
 
                     <%--Div QCLog   Start --%>
                     <div>
@@ -123,6 +136,8 @@
                         </asp:GridView>
                     </div>
                     <%--Div QCLog  End --%>
+
+                    
                 </div>
 
             </ContentTemplate>

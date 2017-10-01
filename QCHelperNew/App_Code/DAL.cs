@@ -15,6 +15,44 @@ namespace QCHelperNew
         //DataSet ds;
         //SqlCommand cmd;
 
+        public void AUDOP(string str)
+        {
+            SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ForeClosure"].ConnectionString);
+            SqlCommand cmd;
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+            con.Open();
+            cmd = new SqlCommand(str, con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        public DataSet GetCount(string str)
+        {
+            SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ForeClosure"].ConnectionString);
+            SqlDataAdapter da;
+            DataSet ds;
+            SqlCommand cmd;
+
+            cmd = new SqlCommand(str, con);
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandTimeout = 2700;
+
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+            con.Open();
+
+            da = new SqlDataAdapter(cmd);
+            ds = new DataSet();
+            da.Fill(ds);
+            con.Close();
+            return ds;
+        }
+
         private DataSet GetCount(string str, int index)
         {
             SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ForeClosure"].ConnectionString);

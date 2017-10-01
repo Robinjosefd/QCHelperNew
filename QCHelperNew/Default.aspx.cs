@@ -33,6 +33,7 @@ namespace QCHelperNew
         System.Threading.Thread thrd_BindCount_4 = null;
         System.Threading.Thread thrd_bindCSV = null;
         System.Threading.Thread thrd_BindRobotLog = null;
+        System.Threading.Thread thrd_BindVisualIndicator = null;
 
         static object obj_QCCount1_1to11 = null;
         static object obj_QCCount2_12_TotalUpdatesForAllFields = null;
@@ -43,6 +44,9 @@ namespace QCHelperNew
         static object obj_CSVCreated2 = null;
 
         static object obj_RobotLog = null;
+
+        static object obj_VisualIndicator = null;
+
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -73,6 +77,8 @@ namespace QCHelperNew
             obj_CSVCreated2 = null;
 
             obj_RobotLog = null;
+
+            obj_VisualIndicator = null;
         }
 
         private void MakeAllThreadNull()
@@ -103,6 +109,10 @@ namespace QCHelperNew
                 {
                     thrd_BindRobotLog.Abort();
                 }
+                if (thrd_BindVisualIndicator != null)
+                {
+                    thrd_BindVisualIndicator.Abort();
+                }
             }
             catch { }
         }
@@ -113,11 +123,22 @@ namespace QCHelperNew
             //this.ucQCCounts.qcDate = this.txtDate.Text;
             //this.ucQCCsv.qcDate = this.txtDate.Text;
 
+            UpdateHaveComps();
             MakeAllNull();
-
-            
-
             LoadAllValues();
+        }
+
+        private void UpdateHaveComps()
+        {
+            DAL _dal = new DAL();
+            string strQuery = @"
+update retrequred set havecomps=1  where apn in (
+select distinct mainapn from realquestmaster )
+
+update retrequred set havecomps=1  where apn in (
+select distinct mainAPN from temp_realquestmaster 
+)";
+            _dal.AUDOP(strQuery);
         }
 
         private void LoadAllValues()
@@ -152,9 +173,12 @@ namespace QCHelperNew
                 thrd_BindRobotLog = new System.Threading.Thread(() => this.BindRobotLog());
                 thrd_BindRobotLog.Start();
             }
+            if (thrd_BindVisualIndicator == null)
+            {
+                thrd_BindVisualIndicator = new System.Threading.Thread(() => this.BindVisualIndicatorValues());
+                thrd_BindVisualIndicator.Start();
+            }
         }
-
-
 
 
         #region Timer DIsplay Area
@@ -181,10 +205,9 @@ namespace QCHelperNew
             dtable.Rows.Add(new string[] { "***Retrieving data****", DateTime.Now.ToString() });
 
             //dtable.Rows.Add(new string[] { "2", "B", DateTime.Now.ToString() });
-            
+
             return dtable;
         }
-
 
         protected void tmr_Tick(object sender, EventArgs e)
         {
@@ -269,6 +292,17 @@ namespace QCHelperNew
                 this.dxGrdRobotLog.DataBind();
             }
 
+            //Visual Indicator
+            if (obj_VisualIndicator != null)
+            {
+                this.dxGrdVisualIndicator.DataSource = (DataTable)obj_VisualIndicator;
+                this.dxGrdVisualIndicator.DataBind();
+            }
+            else
+            {
+                this.dxGrdVisualIndicator.DataSource = GetTestData("obj_VisualIndicator");
+                this.dxGrdVisualIndicator.DataBind();
+            }
 
             timerDisp();
         }
@@ -346,7 +380,6 @@ namespace QCHelperNew
             }
         }
 
-
         private DataTable cutomizeDataset(DataSet ds)
         {
             DataTable table = new DataTable();
@@ -372,7 +405,7 @@ namespace QCHelperNew
             // Session["data"] = table;
             return table;
         }
-        
+
         private DataTable cutomizeDataset_RobotLog(DataSet ds)
         {
             DataTable table = new DataTable();
@@ -388,20 +421,18 @@ namespace QCHelperNew
                     string str2 = table2.Rows[0][columnName].ToString();
                     //if ((columnName.Split(new char[] { ' ' }).Length > 3) )
                     //{
-                        string[] strArray = new string[] { num++.ToString(), Regex.Replace(columnName, @"[0-9]*\.", ""), str2 };
-                        DataRow row = table.NewRow();
-                        row.ItemArray = strArray;
-                        table.Rows.Add(row);
-                   // }
+                    string[] strArray = new string[] { num++.ToString(), Regex.Replace(columnName, @"[0-9]*\.", ""), str2 };
+                    DataRow row = table.NewRow();
+                    row.ItemArray = strArray;
+                    table.Rows.Add(row);
+                    // }
                 }
             }
             // Session["data"] = table;
             return table;
         }
 
-
         #endregion
-
 
         #region CSVCreated Area
         protected void bindCSV()
@@ -427,7 +458,7 @@ namespace QCHelperNew
 
 
         #endregion
-        
+
 
         #region BindLog
         protected void BindRobotLog()
@@ -447,7 +478,28 @@ namespace QCHelperNew
                 this.lblQClog.Text = exception.ToString();
             }
         }
+        #endregion
 
+        #region Visual Indicator
+        protected void BindVisualIndicatorValues()
+        {
+            try
+            {
+                clsVisualIndicator clsVI = new clsVisualIndicator();
+
+                DataTable table = new DataTable();
+                table = clsVI.GetVisualIndicatorValues();
+
+                obj_VisualIndicator = table;
+                this.lblQClog.Text = "Visual Indicator Functioning";
+                this.dxGrdVisualIndicator.DataSource = table;
+                this.dxGrdVisualIndicator.DataBind();
+            }
+            catch (Exception exception)
+            {
+                this.lblVisualIndicator.Text = exception.ToString();
+            }
+        }
         #endregion
     }
 }
