@@ -121,6 +121,15 @@ namespace QCHelperNew {
         protected global::System.Web.UI.WebControls.Button btnShowQC;
         
         /// <summary>
+        /// btnUpdateStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateStatus;
+        
+        /// <summary>
         /// lblError control.
         /// </summary>
         /// <remarks>

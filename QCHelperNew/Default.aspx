@@ -71,6 +71,7 @@
                                     <td>
                                         <asp:Button ID="btnShowQC" runat="server" OnClick="btnShowQC_Click" Text="Get QC"
                                             Width="80px" theme="Glass"></asp:Button>
+                                        <asp:Button ID="btnUpdateStatus" runat="server" OnClick="btnUpdateStatus_Click" Text="Update Status" />
                                     </td>
                                 </tr>
                             </table>

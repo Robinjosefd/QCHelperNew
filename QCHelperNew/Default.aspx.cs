@@ -137,7 +137,23 @@ select distinct mainapn from realquestmaster )
 
 update retrequred set havecomps=1  where apn in (
 select distinct mainAPN from temp_realquestmaster 
+
+ 
+
 )";
+            _dal.AUDOP(strQuery); 
+        }
+
+        //RobotTimeScheduler    : IsActive = 1
+        //PriorityRanking       : IsMovedToRetrequred = 1  
+        private void UpdateStatus()
+        {
+            DAL _dal = new DAL();
+            string strQuery = @"
+UPDATE RobotTimeScheduler SET IsActive = 1  
+
+UPDATE PriorityRanking SET IsMovedToRetrequred = 1
+ ";
             _dal.AUDOP(strQuery);
         }
 
@@ -501,5 +517,10 @@ select distinct mainAPN from temp_realquestmaster
             }
         }
         #endregion
+
+        protected void btnUpdateStatus_Click(object sender, EventArgs e)
+        {
+            UpdateStatus();
+        }
     }
 }
