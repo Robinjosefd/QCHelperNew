@@ -386,11 +386,14 @@ SET @LogDate = DATEADD(MINUTE,-10,GETDATE());
 	SELECT CASE WHEN COUNT(*) > 0 THEN 'YES' ELSE 'NO' END FROM Log_RPP WHERE LogDate > @LogDate
    ) AS 'RPP Sales'
    */
+   
+   /*
    --9-TacForeclosure 
    ---------------------------------------------------------------
    SELECT(
 	SELECT CASE WHEN COUNT(*) > 0 THEN 'YES' ELSE 'NO' END FROM Log_TacForeclosure  WITH(NOLOCK) WHERE LogDate > @LogDate
    ) AS 'TAC-Foreclosure'
+   */
    
    --10-VFASAP 
    ---------------------------------------------------------------
@@ -440,6 +443,11 @@ SET @LogDate = DATEADD(MINUTE,-10,GETDATE());
 	SELECT CASE WHEN COUNT(*) > 0 THEN 'YES' ELSE 'NO' END FROM Log_VAuction WITH(NOLOCK)   WHERE LogDate > @LogDate
    ) AS 'Ventura Auction'
  
+ --18-V NationWide Posting 
+   ---------------------------------------------------------------
+   SELECT(
+	SELECT CASE WHEN COUNT(*) > 0 THEN 'YES' ELSE 'NO' END FROM Log_VNationwidePosting WITH(NOLOCK)   WHERE LogDate > @LogDate
+   ) AS 'Ventura NationWide Posting'
 
     ";
             return strRetVal;
