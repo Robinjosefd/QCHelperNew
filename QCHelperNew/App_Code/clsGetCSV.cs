@@ -66,7 +66,14 @@ namespace QCHelperNew
             strArray[2] = (subDirectoryList.Rows.Count > 0) ? "Yes" : "No";
             row = table.NewRow();
             row.ItemArray = strArray;
-            table.Rows.Add(row);
+            table.Rows.Add(row);            
+            subDirectoryList = clsAmazon.GetSubDirectoryList("CSV/VNationWidePosting/" + str);
+            strArray[0] = num++.ToString();
+            strArray[1] = "VNationWidePosting";
+            strArray[2] = (subDirectoryList.Rows.Count > 0) ? "Yes" : "No";
+            row = table.NewRow();
+            row.ItemArray = strArray;
+            table.Rows.Add(row);  
             subDirectoryList = clsAmazon.GetSubDirectoryList("CSV/PriorityPosting/" + str);
             strArray[0] = num++.ToString();
             strArray[1] = "PriorityPosting";
@@ -102,6 +109,8 @@ namespace QCHelperNew
             row = table.NewRow();
             row.ItemArray = strArray;
             table.Rows.Add(row);
+            
+            /*
             subDirectoryList = clsAmazon.GetSubDirectoryList("CSV/TacForeclosure/" + str);
             strArray[0] = num++.ToString();
             strArray[1] = "TacForeclosure";
@@ -109,6 +118,8 @@ namespace QCHelperNew
             row = table.NewRow();
             row.ItemArray = strArray;
             table.Rows.Add(row);
+            */
+            
             dsetRetValue.Tables.Add(table);
             table = new DataTable();
             table.Columns.Add("SlNo");
